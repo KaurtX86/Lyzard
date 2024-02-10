@@ -1,11 +1,8 @@
-#include <iostream>
-#include <string>
-#include <vector>
+#include "utils.h"
 
 using namespace std;
 
 vector<string> split(string a, string delimiter) {
-	
     vector<string> b; // Результат
     size_t pos = 0;
     string token;
