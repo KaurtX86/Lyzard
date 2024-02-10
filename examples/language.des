@@ -1,0 +1,8 @@
+macro true = True
+macro false = False
+
+structure operator after-keywords-args=1
+$
+def lyzard_operator_$(c)(args):
+    $code_block
+$
