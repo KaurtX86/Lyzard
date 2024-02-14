@@ -70,9 +70,9 @@ int main(int argc, char* argv[]) {
     vector<string> output_file_contents;
     vector<string> input_file_lines;
     string line = "";
-    string buffer_line;
-    string converted_macro;
-
+    string buffer_line = "";
+    string converted_macro = "";
+    int line_counter = 0;
 
     /*
         Main code analyze and convertation.
@@ -90,11 +90,27 @@ int main(int argc, char* argv[]) {
         DO NOT overwrite it!!!
     */
     while (getline(input_file, line)) {
-        for (char i : line) {
-            buffer_line += i;
+	line_counter++;
+	vector<string> words = split(line, " ");
+	
+        for (int i = 0; i < line.size(); i++) {
+            buffer_line += line[i];
 
             // Checking if buffer_line contains one of structures, described in ~/.config/lyzard/language.des
-	    
+	    for (int j = 0; j < structures_from_description_file.size(); j++) {
+		if (buffer_line == "operator") {
+		    bool parsing_operator = true;
+		    string operator_word = "";
+		    for (int x = i + 1; x < line.size(); x++) {
+			if (line[x] == ' ' or line[x] == '\t') {
+			    continue;
+			}
+		    }
+		    if (operator_word == "") {
+			cerr << line_counter << "| " << "[Error] in [" << path << << endl;
+		    }
+		}
+	    }
         }
     }
     
