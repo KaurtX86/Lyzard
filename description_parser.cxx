@@ -10,24 +10,22 @@ map<pair<string, string>, vector<string>> parse_file(ifstream &description_file)
     vector<string> errors;
     
     while (getline(description_file, line)) {
-	line_counter++;
-	
+        line_counter++;
+
         vector<string> words = split(line, " ");
-	string buffer = "";
-	bool code_block = false;
-	
+        string buffer = "";
+        bool code_block = false;
+
         for (int i = 0; i < words.size(); i++) {
             if (words[i] == "macro" and i == 0) {
-		pair<string, string> name = {words[i + 1], "macro"};
-	    }
-	    if (words[i] == "structure") {
-		vector<string> structure_params;
-		// map<string, string> structure_params;
-		vector<string> name = {};
-	    }
-	}
+                pair<string, string> name = {words[i + 1], "macro"};
+            }
+            if (words[i] == "structure") {
+                vector<string> structure_params;
+                // map<string, string> structure_params;
+                vector<string> name = {};
+            }
+        }
     }
     return result;
 }
-
-
