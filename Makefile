@@ -15,8 +15,8 @@ clean:
 	rm -rf bin
 
 help:
-	echo "Available targets:"
-	echo "compile-lyzard -- ...in to bin/lyzard"
-	echo "install -- ... bin/lyzard in /usr/local/bin/lyzard"
-	echo "clean -- delete bin/ after compile-lyzard"
+	@echo "Available targets:"
+	@echo "compile-lyzard -- ...in to bin/lyzard"
+	@echo "install -- ... bin/lyzard in /usr/local/bin/lyzard"
+	@echo "clean -- delete bin/ after compile-lyzard"
 
