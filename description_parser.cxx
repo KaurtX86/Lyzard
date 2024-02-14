@@ -3,21 +3,31 @@
 
 using namespace std;
 
-map<string, vector<string>> parse_file(ifstream &description_file) {
-    map<string, vector<string>> result;
+map<pair<string, string>, vector<string>> parse_file(ifstream &description_file) {
+    map<pair<string, string>, vector<string>> result;
     string line;
-
+    int line_counter = 0;
+    vector<string> errors;
+    
     while (getline(description_file, line)) {
+	line_counter++;
+	
         vector<string> words = split(line, " ");
-
+	string buffer = "";
+	bool code_block = false;
+	
         for (int i = 0; i < words.size(); i++) {
-            if (words[i] == "macro") {
-                vector<string> macro_params;
-                for (int j = i + 1; j < words.size(); j++) {
-                    macro_params.push_back(words[j]);
-                }
-            }
-        }
+            if (words[i] == "macro" and i == 0) {
+		pair<string, string> name = {words[i + 1], "macro"};
+	    }
+	    if (words[i] == "structure") {
+		vector<string> structure_params;
+		// map<string, string> structure_params;
+		vector<string> name = {};
+	    }
+	}
     }
     return result;
 }
+
+

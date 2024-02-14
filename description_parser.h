@@ -5,6 +5,6 @@
 #include <vector>
 #include <fstream>
 
-std::map<std::string, std::vector<std::string>> parse_file(std::ifstream &description_file);
+std::map<std::pair<std::string, std::string>, std::vector<std::string>> parse_file(std::ifstream &description_file);
 
 #endif
