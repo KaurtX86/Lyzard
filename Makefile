@@ -17,4 +17,6 @@ clean:
 help:
 	echo "Available targets:"
 	echo "compile-lyzard -- ...in to bin/lyzard"
-	echo ""
+	echo "install -- ... bin/lyzard in /usr/local/bin/lyzard"
+	echo "clean -- delete bin/ after compile-lyzard"
+
