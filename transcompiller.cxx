@@ -27,7 +27,7 @@ int check_argv(int argc, char** argv) {
 	    return 1;
 	}
         else {
-            if (argv[i][0] == '-' or argv[i][0] == '-' and argv[i][1] == '-') {
+            if (argv[i][0] == '-') {
                 cout << PROGRAM_NAME << ": " << "invalid option " << argv[i]  << endl;
                 return 2;
             }
