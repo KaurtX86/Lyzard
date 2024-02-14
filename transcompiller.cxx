@@ -17,7 +17,7 @@ const char PROGRAM_NAME[] = "Lyzard";
 const char CONFIG_PATH[] = ".config/lyzard";
 // Variables
 string path = "";
-map<string, vector<string>> structures_from_description_file;
+map<pair<string, string>, vector<string>> structures_from_description_file;
 
 // Functions
 int check_argv(int argc, char** argv) {
@@ -28,10 +28,11 @@ int check_argv(int argc, char** argv) {
 	}
         else {
             if (argv[i][0] == '-' or argv[i][0] == '-' and argv[i][1] == '-') {
-                cout << PROGRAM_NAME << ": " << "invalid option " << i << endl;
+                cout << PROGRAM_NAME << ": " << "invalid option " << argv[i]  << endl;
                 return 2;
             }
-        }
+	    path = argv[i];
+	}
     }
     return 0;
 }
