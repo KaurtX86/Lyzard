@@ -5,6 +5,12 @@
 #include <vector>
 #include <fstream>
 
-std::map<std::pair<std::string, std::string>, std::vector<std::string>> parse_file(std::ifstream &description_file);
+enum StructureType {
+    MACRO = 0,
+};
+
+void process_block(const std::pair<StructureType, std::string>& name, std::string block, std::map<std::pair<StructureType, std::string>, std::vector<std::string>>& to);
+std::vector<std::string> parse_description_file(std::ifstream &description_file, std::map<std::pair<StructureType, std::string>, std::vector<std::string>>&);
+void create_error(std::vector<std::string>& errors, int line, std::string error);
 
 #endif

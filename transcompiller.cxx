@@ -17,12 +17,12 @@ const char PROGRAM_NAME[] = "Lyzard";
 
 // Variables
 string script_path = "";
-string description_file_path = "language.des";
+string description_file_path = "./examples/language.des";
 
 // Parameters from argv
 bool run_after_complete = false;
 
-map<pair<string, string>, vector<string>> structures_from_description_file;
+map<pair<StructureType, string>, vector<string>> structures_from_description_file;
 
 // Functions
 int check_argv(int argc, char** argv) {
@@ -58,7 +58,19 @@ int main(int argc, char* argv[]) {
     ifstream input_file(script_path);
 
     cout << "[DESCRIPTION FILE PARSE OUTPUT]" << endl;
-    structures_from_description_file = parse_file(description_file);
+    vector<string> parse_errors = parse_description_file(description_file, structures_from_description_file);
+    if (parse_errors.size() > 0) {
+        for (const string& i : parse_errors)
+            cerr << i << endl;
+        return 5;
+    }
+
+    for (const pair<pair<StructureType, string>, vector<string>>& i : structures_from_description_file) {
+        cout << "Type: " << i.first.first << ", Name: " << i.first.second << ", Data: ";
+        for (const string& j : i.second)
+            cout << j << ' ';
+        cout << endl;
+    }
 
     if (not input_file.good() or script_path == "") {
         cout << PROGRAM_NAME << ":" << " cannot access '" << script_path << "'" << " no such file or directory" << endl;
