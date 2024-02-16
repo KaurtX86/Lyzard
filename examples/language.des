@@ -1,6 +1,12 @@
 macro true = True 
 macro false = False
 
+macro ask_name
+$
+print("Hello, world!")
+a = input("Enter your name: ")
+$
+
 setup no-parentheses print
 
 structure operator after-keywords-args 1

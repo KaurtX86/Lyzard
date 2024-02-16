@@ -14,11 +14,12 @@ using namespace std;
 // Constants
 const char VERSION[] = "0.1.0";
 const char PROGRAM_NAME[] = "Lyzard";
-const char CONFIG_PATH[] = ".config/lyzard";
+
 // Variables
 string script_path = "";
 string description_file_path = "language.des";
 
+// Parameters from argv
 bool run_after_complete = false;
 
 map<pair<string, string>, vector<string>> structures_from_description_file;
@@ -53,9 +54,10 @@ int main(int argc, char* argv[]) {
     if (return_status == 1)
         return 0;
 
-    ifstream description_file("");
+    ifstream description_file(description_file_path);
     ifstream input_file(script_path);
 
+    cout << "[DESCRIPTION FILE PARSE OUTPUT]" << endl;
     structures_from_description_file = parse_file(description_file);
 
     if (not input_file.good() or script_path == "") {
@@ -96,6 +98,8 @@ int main(int argc, char* argv[]) {
       All those functions will be writen in lyzard.py file, so
       DO NOT overwrite it!!!
     */
+    cout << "[SCRIPT PARSE/TRANSCOMPILATION OUTPUT]" << endl;
+    
     while (getline(input_file, line)) {
         line_counter++;
         vector<string> words = split(line, " ");
@@ -108,11 +112,13 @@ int main(int argc, char* argv[]) {
                 if (buffer_line == "operator") {
                     bool parsing_operator = true;
                     string operator_word = "";
+                    
                     for (int x = i + 1; x < line.size(); x++) {
                         if (line[x] == ' ' or line[x] == '\t') {
                             continue;
                         }
                     }
+                    
                     if (operator_word == "") {
                         cerr << line_counter << "| " << "[Error] in [" << script_path << "] " << "invalid operator" << endl;
                     }
@@ -120,9 +126,9 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-
+    
     if (run_after_complete) {
-        system("python3 " + output_filename);
+        system(("python3 " + output_filename).c_str());
     }
 
     return 0;
