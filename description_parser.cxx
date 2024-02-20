@@ -7,7 +7,7 @@
 using namespace std;
 
 
-void process_block(const pair<StructureType, string>& name, string block, map<pair<StructureType, string>, vector<string>>& to) {
+void process_block(const pair<StructureType, string> &name, string block, map<pair<StructureType, string>, vector<string>> &to) {
     switch (name.first) {
         case StructureType::MACRO:
             to[name] = {block};
@@ -16,7 +16,7 @@ void process_block(const pair<StructureType, string>& name, string block, map<pa
 }
 
 
-vector<string> parse_description_file(ifstream &description_file, map<pair<StructureType, string>, vector<string>>& to) {
+vector<string> parse_description_file(ifstream &description_file, map<pair<StructureType, string>, vector<string>> &to) {
     string line;
     int line_counter = 0;
     vector<string> errors;
@@ -112,7 +112,7 @@ vector<string> parse_description_file(ifstream &description_file, map<pair<Struc
 }
 
 
-void create_error(vector<string>& errors, int line, string error) {
+void create_error(vector<string> &errors, int line, string error) {
     stringstream ss;
     ss << "[Error] At line " << line << ": ";
     ss << error;

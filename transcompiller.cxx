@@ -17,7 +17,7 @@ const char PROGRAM_NAME[] = "Lyzard";
 
 // Variables
 string script_path = "";
-string description_file_path = "./examples/language.des";
+string description_file_path = "../examples/language.des";
 
 // Parameters from argv
 bool run_after_complete = false;
@@ -57,6 +57,11 @@ int main(int argc, char* argv[]) {
     ifstream description_file(description_file_path);
     ifstream input_file(script_path);
 
+    if (not description_file.good()) {
+        cout << PROGRAM_NAME << ":" << " cannot access '" << description_file_path << "'" << " no such file or directory" << endl;
+        return 2;
+    }
+    
     cout << "[DESCRIPTION FILE PARSE OUTPUT]" << endl;
     vector<string> parse_errors = parse_description_file(description_file, structures_from_description_file);
     if (parse_errors.size() > 0) {
@@ -119,7 +124,7 @@ int main(int argc, char* argv[]) {
         for (int i = 0; i < line.size(); i++) {
             buffer_line += line[i];
 
-            // Checking if buffer_line contains one of structures, described in ~/.config/lyzard/language.des
+            // Checking if buffer_line contains one of structures, described in description file
             for (int j = 0; j < structures_from_description_file.size(); j++) {
                 if (buffer_line == "operator") {
                     bool parsing_operator = true;
