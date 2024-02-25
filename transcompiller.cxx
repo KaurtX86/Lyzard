@@ -37,7 +37,7 @@ int check_argv(int argc, char** argv) {
         else {
             if (argv[i][0] == '-') {
                 cout << PROGRAM_NAME << ": " << "invalid option " << argv[i]  << endl;
-                return 2;
+                return 127;
             }
             script_path = argv[i];
         }
@@ -49,10 +49,11 @@ int check_argv(int argc, char** argv) {
 int main(int argc, char* argv[]) {
     int return_status = check_argv(argc, argv);
 
-    if (return_status == 2)
-        return 2;
     if (return_status == 1)
         return 0;
+    if (return_status)
+        return return_status;
+
 
     ifstream description_file(description_file_path);
     ifstream input_file(script_path);
@@ -93,7 +94,7 @@ int main(int argc, char* argv[]) {
     ofstream output_file(output_filename);
     ofstream lyzard_py("lyzard.py");
 
-    vector<string> output_file_contents;
+    vector<string> output_file_contents = {"from lyzard import *"};
     vector<string> input_file_lines;
     string line = "";
     string buffer_line = "";
@@ -138,7 +139,9 @@ int main(int argc, char* argv[]) {
                     
                     if (operator_word == "") {
                         cerr << line_counter << "| " << "[Error] in [" << script_path << "] " << "invalid operator" << endl;
+                        continue;
                     }
+
                 }
             }
         }

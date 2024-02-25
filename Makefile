@@ -1,8 +1,8 @@
-CC = g++
+CPP = g++
 
 compile-lyzard:
 	@mkdir -p bin
-	${CC} *.cxx -o ./bin/lyzard
+	${CPP} *.cxx -o ./bin/lyzard
 
 install:
 	@if ! [ "$(shell id -u)" = 0 ]; then\
