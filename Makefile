@@ -10,6 +10,8 @@ install:
 	else\
 		cp ./bin/lyzard /usr/local/bin/lyzard;\
 	fi
+	mkdir ~/.config/lyzard
+	cp misc/language.des ~/.config/lyzard/language.des
 
 uninstall:
 	@if ! [ "$(shell id -u)" = 0 ]; then\

@@ -111,7 +111,6 @@ vector<string> parse_description_file(ifstream &description_file, map<pair<Struc
     return errors;
 }
 
-
 void create_error(vector<string> &errors, int line, string error) {
     stringstream ss;
     ss << "[Error] At line " << line << ": ";

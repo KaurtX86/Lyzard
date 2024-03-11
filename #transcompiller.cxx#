@@ -17,7 +17,7 @@ const char PROGRAM_NAME[] = "Lyzard";
 
 // Variables
 string script_path = "";
-string description_file_path = string(getenv("HOME")) + "/.config/lyzard/language.des";
+string description_file_path = "../examples/language.des";
 
 // Variables specific for built in structures
 int operator_counter = 0;
@@ -64,17 +64,11 @@ string parse_string_macros(string str) {
 
 // Returns converted string, error message or nothing
 string parse_string(string str) {
-    string converted_string = "def lyzard-operator";
+    string converted_string = "";
     string buffer_line = "";
-    string spaces = "";
     for (unsigned int i = 0; i < str.size(); i++){
-        if (str[i] == ' ' or str[i] == '\t') {
-            spaces += str[i];
-            continue;
-        }
-
         buffer_line += str[i];
-
+        
         if (str[i] == '#') {
             break;
         }
@@ -82,6 +76,7 @@ string parse_string(string str) {
         for (unsigned int j = 0; j < structures_from_description_file.size(); j++) {
             // Built in structures
             if (buffer_line == "operator") {
+                converted_string = "def" + 
                 // bool parsing_operator = true;
                 string operator_word = "";
                 string operator_args = "";
@@ -109,12 +104,9 @@ string parse_string(string str) {
 
                 }
                 operator_args = parse_string_macros(operator_args);
-                converted_string = "def lyzard-operator-" + to_string(operator_counter) + " " + operator_args + ":";
-                operator_counter++;
             }
         }
     }
-    
     return converted_string;
 }
 
@@ -167,6 +159,7 @@ int main(int argc, char* argv[]) {
 
     vector<string> output_file_lines = {"from lyzard import *"};
     vector<string> input_file_lines;
+
     string line = "";
     string buffer_line = "";
     string converted_macro = "";
@@ -199,7 +192,7 @@ int main(int argc, char* argv[]) {
             // Checking if buffer_line contains one of structures, described in description file or stupidly built in
             for (unsigned int j = 0; j < structures_from_description_file.size(); j++) {
                 if (buffer_line == "operator") {
-                    // bool parsing_operator = true;
+                    bool parsing_operator = true;
                     string operator_word = "";
                     string args = "";
                     for (unsigned int x = i + 1; x < line.size(); x++) {
