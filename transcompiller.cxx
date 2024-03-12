@@ -56,7 +56,7 @@ string parse_string_macros(string str) {
     for (unsigned int i = 0; i < str.size(); i++) {
         buffer_str += str[i];
         for (unsigned int j = 0; j < structures_from_description_file.size(); j++) {
-            
+
         }
     }
     return "";
