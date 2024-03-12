@@ -1,0 +1,16 @@
+# This is a comment. '#' must be placed at start of line
+# Indentation is ignored at definition, but not in blocks
+
+	macro true=True
+   macro false = False
+
+macro ask_name
+# This is block for multiline macros
+$
+print("Hello, world!")
+name = input("Enter your name: ")
+$
+
+# Not implemented now
+#setup no-parentheses print
+#structure operator after-keywords-args 1
