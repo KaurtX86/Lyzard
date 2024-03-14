@@ -3,14 +3,14 @@
 using namespace std;
 
 vector<string> split(string a, const string& delimiter) {
-    vector<string> b; // Результат
+    vector<string> b;
     size_t pos = 0;
     string token;
     
-    while ((pos = a.find(delimiter)) != string::npos) { // Пока есть запятые мы добавляем
+    while ((pos = a.find(delimiter)) != string::npos) {
         token = a.substr(0, pos);
         b.push_back(token);
-        a.erase(0, pos + delimiter.length()); // Удаляем до запятой
+        a.erase(0, pos + delimiter.length());
     }
     token = "";
     
